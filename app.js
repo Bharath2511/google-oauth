@@ -8,8 +8,8 @@ app.set('view engine','ejs')
 // set up routes
 app.use('/auth',authRoutes)
 
-app.listen(2700,()=>{
-    console.log('2700')
+app.listen(2800,()=>{
+    console.log('2800')
 })
 
 //create home page
