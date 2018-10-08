@@ -1,6 +1,7 @@
 const passport = require('passport')
 const googleStrategy = require('passport-google-oauth20')
 const keys = require('./keys')
+const User = require('../models/user')
 
 //using our strategy
 passport.use(new googleStrategy({
@@ -11,5 +12,11 @@ passport.use(new googleStrategy({
 },(accessToken,refreshToken,profile,done)=>{
     //passport callback function
 console.log(profile)
+new User({
+    username:profile.displayName,
+    googleId : profile.id
+}).save().then((newUser)=>{
+    console.log('new user created: '+newUser)
+})
 })
 )
