@@ -9,7 +9,7 @@ const authCheck = (req,res,next) => {
         next()
     }
 }
-router.get('/',(req,res)=>{
+router.get('/',authCheck,(req,res)=>{
     res.send('profile page of :',req.user.username)
 })
 
