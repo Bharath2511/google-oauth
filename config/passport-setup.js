@@ -7,12 +7,12 @@ passport.serializeUser((user,done)=>{
     done(null,user.id)
 })
 
-// passport.deserializeUser((id,done)=>{
-//     User.findById(id).then((user)=>{
-//         done(null,user)
-//     })
+ passport.deserializeUser((id,done)=>{
+     User.findById(id).then((user)=>{
+        done(null,user)
+     })
     
-// })
+ })
 
 //using our strategy
 passport.use(new googleStrategy({
