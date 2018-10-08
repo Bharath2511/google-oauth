@@ -4,13 +4,9 @@ const passportSetup = require('./config/passport-setup')
 const mongoose = require('mongoose')
 const keys = require('./config/keys')
 const cookieSession = require('cookie-session')
+const passport = require('passport')
 
 const app = express()
-
-//connect to mongodb
-mongoose.connect(keys.mongoDB.mongoURI,()=>{
-    console.log('connected to mongodb')
-})
 
 //set up view engine
 app.set('view engine','ejs')
@@ -20,14 +16,25 @@ app.use(cookieSession({
     keys : [keys.session.cookieKey]
 }))
 
+//initialize passport
+app.use(passport.initialize())
+app.use(passport.session())
 // set up routes
 app.use('/auth',authRoutes)
 
-app.listen(2800,()=>{
-    console.log('2800')
-})
 
 //create home page
 app.get('/',(req,res)=>{
     res.render('home')
+})
+
+
+//connect to mongodb
+mongoose.connect(keys.mongoDB.mongoURI,()=>{
+    console.log('connected to mongodb')
+})
+
+
+app.listen(2800,()=>{
+    console.log('2800')
 })
